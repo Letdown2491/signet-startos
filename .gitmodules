@@ -1,0 +1,3 @@
+[submodule "signet"]
+	path = signet
+	url = https://github.com/Letdown2491/signet.git

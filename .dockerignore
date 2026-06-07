@@ -1,0 +1,7 @@
+.git
+.gitmodules
+*.s9pk
+javascript
+node_modules
+**/node_modules
+signet/.git
