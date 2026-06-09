@@ -85,12 +85,14 @@ make            # builds the image from ./signet and packs signet.s9pk
 make install    # sideload to a configured StartOS server
 ```
 
-To update the packaged Signet version, bump the submodule:
+To update the packaged Signet version, bump the submodule and advance the
+version graph (see [UPDATING.md](UPDATING.md) for the full process):
 
 ```bash
-cd signet && git fetch && git checkout <tag>   # e.g. v1.10.0
+cd signet && git fetch --tags && git checkout <tag>   # e.g. v1.10.1
 cd .. && git add signet
-# bump startos/versions/current.ts, then rebuild
+# move the old startos/versions/current.ts into a per-version file, add it to
+# `other` in startos/versions/index.ts, set current.ts to the new version, rebuild
 ```
 
 ---
