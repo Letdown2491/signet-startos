@@ -25,7 +25,7 @@ The image bundles **both** Signet processes and runs them in one container:
 - **Daemon** (NIP-46 signer + REST API) on `127.0.0.1:3000` (internal only).
 - **Web dashboard** (UI server) on `0.0.0.0:4174`, reverse-proxying to the daemon over localhost. Only this port is exposed as a StartOS interface.
 
-The entrypoint runs Prisma migrations, starts the daemon, then runs the dashboard in the foreground (which StartOS health-checks).
+The entrypoint runs Prisma migrations (aborting startup if they fail), then starts the daemon and the dashboard as children of the shell, which stays PID 1 to supervise them: SIGTERM from StartOS is forwarded to both (so the daemon's graceful shutdown runs), and if either process exits the container goes down with it so StartOS restarts the service.
 
 ---
 

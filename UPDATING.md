@@ -49,10 +49,15 @@ git -C signet describe --tags
 3. **Verify, build, and test:**
 
    ```sh
-   npm run check        # tsc --noEmit
+   npm run check        # version guard + tsc --noEmit
    make                 # builds the image from ./signet and packs the s9pk
    make install         # optional: sideload to a StartOS server to test upgrade
    ```
+
+   `npm run check` (also run by `make` and CI) first asserts that the version
+   in `startos/versions/current.ts` matches `signet/VERSION`, so a bump that
+   updates the submodule or the version graph but not the other fails the
+   build instead of shipping a mislabeled package.
 
 4. **Commit** the submodule pointer and the version files:
 
